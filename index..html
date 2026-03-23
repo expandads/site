@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="pt-br"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700;800;900&family=Work+Sans:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+  tailwind.config = {
+    darkMode: "class",
+    theme: {
+      extend: {
+        colors: {
+          "on-secondary": "#ffffff","secondary-fixed": "#ffdf9e","on-primary": "#ffffff",
+          "secondary-fixed-dim": "#e4c27c","error": "#ba1a1a","primary": "#785900",
+          "inverse-primary": "#fabd00","surface-container-high": "#e8e8e8","tertiary": "#006877",
+          "primary-fixed-dim": "#fabd00","tertiary-fixed": "#a5eeff","on-tertiary-fixed": "#001f25",
+          "tertiary-fixed-dim": "#00daf8","on-primary-container": "#6d5100","tertiary-container": "#00defd",
+          "secondary-container": "#ffdb92","surface-bright": "#f9f9f9","surface-dim": "#dadada",
+          "on-primary-fixed-variant": "#5b4300","error-container": "#ffdad6","secondary": "#745b1f",
+          "outline": "#827660","inverse-on-surface": "#f1f1f1","surface-container": "#eeeeee",
+          "surface-variant": "#e2e2e2","primary-fixed": "#ffdf9e","on-secondary-container": "#795f23",
+          "on-secondary-fixed-variant": "#5a4307","on-surface": "#1a1c1c","on-error-container": "#93000a",
+          "surface-tint": "#785900","surface-container-lowest": "#ffffff","on-primary-fixed": "#261a00",
+          "on-tertiary": "#ffffff","on-secondary-fixed": "#261a00","on-background": "#1a1c1c",
+          "inverse-surface": "#2f3131","surface": "#f9f9f9","on-tertiary-container": "#005e6c",
+          "surface-container-highest": "#e2e2e2","surface-container-low": "#f3f3f3","background": "#f9f9f9",
+          "on-tertiary-fixed-variant": "#004e5a","primary-container": "#ffc107","on-surface-variant": "#4f4632",
+          "on-error": "#ffffff","outline-variant": "#d4c5ab"
+        },
+        fontFamily: {"headline": ["Space Grotesk"],"body": ["Work Sans"],"label": ["Work Sans"]},
+        borderRadius: {"DEFAULT": "0.125rem","lg": "0.25rem","xl": "0.5rem","full": "0.75rem"},
+      },
+    },
+  }
+</script>
+<style>
+  .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+  body { font-family: 'Work Sans', sans-serif; }
+  h1, h2, h3 { font-family: 'Space Grotesk', sans-serif; }
+  html { scroll-behavior: smooth; }
+</style>
+</head>
+<body class="bg-background text-on-surface antialiased">
+
+<!-- TopNavBar -->
+<nav class="fixed top-0 w-full z-50 bg-stone-50/80 dark:bg-stone-950/80 backdrop-blur-xl">
+  <div class="flex justify-between items-center px-8 py-6 max-w-full mx-auto">
+    <div class="text-2xl font-black text-stone-900 dark:text-stone-50 tracking-tighter font-headline">Ad Expand</div>
+    <div class="hidden md:flex gap-8 items-center">
+      <a class="font-headline font-bold tracking-tight text-stone-500 dark:text-stone-400 hover:text-stone-900 dark:hover:text-stone-100 transition-colors" href="#produtos">Produtos</a>
+      <a class="font-headline font-bold tracking-tight text-stone-500 dark:text-stone-400 hover:text-stone-900 dark:hover:text-stone-100 transition-colors" href="#pacotes">Pacotes</a>
+      <a class="font-headline font-bold tracking-tight text-stone-500 dark:text-stone-400 hover:text-stone-900 dark:hover:text-stone-100 transition-colors" href="#adicionais">Adicionais</a>
+      <a class="font-headline font-bold tracking-tight text-stone-900 dark:text-white border-b-2 border-amber-400 pb-1" href="#pagamento">Pagamento</a>
+    </div>
+    <a href="https://wa.me/5575999435150?text=Oi" target="_blank" class="bg-primary-container text-on-primary-fixed font-bold px-6 py-2 rounded-sm hover:opacity-80 transition-opacity scale-95 duration-200 ease-in-out">
+      Falar Agora
+    </a>
+  </div>
+</nav>
+
+<main class="pt-32 pb-24">
+
+  <!-- ══ PRODUTOS ══ -->
+  <section id="produtos" class="pb-24 px-6 max-w-7xl mx-auto">
+
+    <header class="mb-20">
+      <span class="label-md font-label uppercase tracking-[0.2em] text-primary font-semibold mb-4 block">Soluções de Performance</span>
+      <h1 class="text-[3.5rem] md:text-[5rem] font-headline font-black leading-[0.9] tracking-tighter text-on-surface mb-6">
+        Nossas <span class="text-primary-container">Soluções.</span>
+      </h1>
+      <p class="max-w-2xl text-lg text-on-surface-variant leading-relaxed">
+        Transformamos cliques em clientes com páginas otimizadas para máxima taxa de conversão. Escolha o modelo ideal para o seu negócio.
+      </p>
+    </header>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+
+      <!-- Produto 1: WhatsApp -->
+      <div class="bg-surface-container-low p-10 flex flex-col justify-between hover:bg-surface-container-lowest transition-colors duration-300 group">
+        <div>
+          <div class="mb-8">
+            <span class="material-symbols-outlined text-4xl text-primary-container">chat</span>
+          </div>
+          <h3 class="text-2xl font-headline font-bold tracking-tight mb-4">Página WhatsApp</h3>
+          <p class="text-on-surface-variant mb-12 leading-relaxed">
+            Ideal para atendimento direto e humanizado. Sua página integrada diretamente ao WhatsApp com gatilhos de contato imediato.
+          </p>
+        </div>
+        <div>
+          <div class="mb-8">
+            <span class="text-sm font-label uppercase tracking-widest text-on-surface-variant block mb-1">Investimento</span>
+            <div class="flex items-baseline gap-1">
+              <span class="text-xl font-headline font-bold">R$</span>
+              <span class="text-5xl font-headline font-black text-primary-container tracking-tighter">800</span>
+            </div>
+          </div>
+          <a href="https://wa.me/5575999435150?text=Oi" target="_blank"
+             class="block w-full py-4 bg-surface-container-lowest border border-outline-variant/20 font-bold uppercase tracking-widest text-sm text-center hover:bg-primary-container hover:border-primary-container hover:text-on-primary-fixed transition-all duration-300">
+            Selecionar Plano
+          </a>
+        </div>
+      </div>
+
+      <!-- Produto 2: Formulário -->
+      <div class="bg-surface-container-low p-10 flex flex-col justify-between hover:bg-surface-container-lowest transition-colors duration-300 relative overflow-hidden">
+        <div class="absolute top-0 right-0 bg-primary-container px-4 py-1 text-[10px] font-bold uppercase tracking-[0.1em] text-on-primary-fixed">Recomendado</div>
+        <div>
+          <div class="mb-8">
+            <span class="material-symbols-outlined text-4xl text-primary-container">description</span>
+          </div>
+          <h3 class="text-2xl font-headline font-bold tracking-tight mb-4">Página Formulário</h3>
+          <p class="text-on-surface-variant mb-12 leading-relaxed">
+            Captura os dados do seu visitante. Ao final do formulário, o lead é direcionado para onde você quiser — WhatsApp, link de agendamento ou outra página.
+          </p>
+        </div>
+        <div>
+          <div class="mb-8">
+            <span class="text-sm font-label uppercase tracking-widest text-on-surface-variant block mb-1">Investimento</span>
+            <div class="flex items-baseline gap-1">
+              <span class="text-xl font-headline font-bold">R$</span>
+              <span class="text-5xl font-headline font-black text-primary-container tracking-tighter">1.000</span>
+            </div>
+          </div>
+          <a href="https://wa.me/5575999435150?text=Oi" target="_blank"
+             class="block w-full py-4 bg-primary-container text-on-primary-fixed font-bold uppercase tracking-widest text-sm text-center hover:opacity-90 transition-all duration-300">
+            Selecionar Plano
+          </a>
+        </div>
+      </div>
+
+      <!-- Produto 3: Formulário + E-mail -->
+      <div class="bg-surface-container-low p-10 flex flex-col justify-between hover:bg-surface-container-lowest transition-colors duration-300">
+        <div>
+          <div class="mb-8">
+            <span class="material-symbols-outlined text-4xl text-primary-container">mail</span>
+          </div>
+          <h3 class="text-2xl font-headline font-bold tracking-tight mb-4">Formulário + E-mail</h3>
+          <p class="text-on-surface-variant mb-12 leading-relaxed">
+            Tudo da Página Formulário, mais um e-mail automático de confirmação para quem se cadastrar — com banner personalizado e mensagem profissional.
+          </p>
+        </div>
+        <div>
+          <div class="mb-8">
+            <span class="text-sm font-label uppercase tracking-widest text-on-surface-variant block mb-1">Investimento</span>
+            <div class="flex items-baseline gap-1">
+              <span class="text-xl font-headline font-bold">R$</span>
+              <span class="text-5xl font-headline font-black text-primary-container tracking-tighter">1.250</span>
+            </div>
+          </div>
+          <a href="https://wa.me/5575999435150?text=Oi" target="_blank"
+             class="block w-full py-4 bg-surface-container-lowest border border-outline-variant/20 font-bold uppercase tracking-widest text-sm text-center hover:bg-primary-container hover:border-primary-container hover:text-on-primary-fixed transition-all duration-300">
+            Selecionar Plano
+          </a>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Pacotes -->
+    <div id="pacotes" class="mt-32">
+      <div class="flex items-center gap-4 mb-10">
+        <span class="material-symbols-outlined text-primary-container text-4xl">inventory_2</span>
+        <h2 class="text-4xl font-bold tracking-tight">Pacotes com Desconto</h2>
+      </div>
+      <p class="text-on-surface-variant mb-10 max-w-2xl">Precisa de mais de uma página? O desconto é aplicado sobre cada produto individualmente — pode misturar os tipos.</p>
+
+      <div class="overflow-x-auto">
+        <table class="w-full">
+          <thead>
+            <tr class="bg-on-surface text-surface-container-lowest">
+              <th class="text-left px-6 py-4 font-headline font-bold uppercase tracking-widest text-sm">Quantidade</th>
+              <th class="text-left px-6 py-4 font-headline font-bold uppercase tracking-widest text-sm">Desconto</th>
+              <th class="text-left px-6 py-4 font-headline font-bold uppercase tracking-widest text-sm">WhatsApp</th>
+              <th class="text-left px-6 py-4 font-headline font-bold uppercase tracking-widest text-sm">Formulário</th>
+              <th class="text-left px-6 py-4 font-headline font-bold uppercase tracking-widest text-sm">Form. + E-mail</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="bg-surface-container-low border-b border-outline-variant/20">
+              <td class="px-6 py-4 font-bold">1 página</td>
+              <td class="px-6 py-4 text-on-surface-variant">—</td>
+              <td class="px-6 py-4 font-headline font-black text-on-surface">R$ 800</td>
+              <td class="px-6 py-4 font-headline font-black text-on-surface">R$ 1.000</td>
+              <td class="px-6 py-4 font-headline font-black text-on-surface">R$ 1.250</td>
+            </tr>
+            <tr class="bg-surface-container-lowest border-b border-outline-variant/20">
+              <td class="px-6 py-4 font-bold">2 páginas</td>
+              <td class="px-6 py-4 text-primary font-bold">5% off cada</td>
+              <td class="px-6 py-4 font-headline font-black text-primary-container">R$ 760</td>
+              <td class="px-6 py-4 font-headline font-black text-primary-container">R$ 950</td>
+              <td class="px-6 py-4 font-headline font-black text-primary-container">R$ 1.188</td>
+            </tr>
+            <tr class="bg-surface-container-low">
+              <td class="px-6 py-4 font-bold">3 páginas</td>
+              <td class="px-6 py-4 text-primary font-bold">10% off cada</td>
+              <td class="px-6 py-4 font-headline font-black text-primary-container">R$ 720</td>
+              <td class="px-6 py-4 font-headline font-black text-primary-container">R$ 900</td>
+              <td class="px-6 py-4 font-headline font-black text-primary-container">R$ 1.125</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="mt-4 flex items-center gap-3 p-4 bg-surface-container">
+        <span class="material-symbols-outlined text-on-surface-variant text-base">info</span>
+        <span class="text-sm text-on-surface-variant">4 ou mais páginas? <a href="https://wa.me/5575999435150?text=Oi" target="_blank" class="font-bold text-on-surface border-b border-primary-container hover:text-primary transition-colors">Consulte condições especiais.</a></span>
+      </div>
+    </div>
+
+    <!-- Mensalidade -->
+    <div class="mt-32 bg-on-surface text-surface-container-lowest p-12 flex flex-col md:flex-row items-center gap-12">
+      <div class="flex-1">
+        <h2 class="text-3xl font-headline font-black tracking-tight mb-6 leading-none">Sua página sempre no ar.</h2>
+        <p class="text-surface-variant/70 leading-relaxed mb-8">Inclui domínio próprio e todas as atualizações que você precisar. Sem contratar nada em outro lugar. Cancela quando quiser.</p>
+        <a href="https://wa.me/5575999435150?text=Oi" target="_blank" class="text-primary-container font-bold uppercase tracking-widest text-sm border-b border-primary-container pb-1 hover:opacity-80 transition-opacity">
+          Saber mais
+        </a>
+      </div>
+      <div class="text-center md:text-right flex-shrink-0">
+        <span class="text-sm uppercase font-bold text-surface-variant/60 block mb-2">Mensalidade</span>
+        <div class="flex items-baseline gap-1 justify-center md:justify-end">
+          <span class="text-2xl font-headline font-bold">R$</span>
+          <span class="text-7xl font-headline font-black text-primary-container tracking-tighter">100</span>
+          <span class="text-xl text-surface-variant/60 self-end pb-2">/mês</span>
+        </div>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- ══ ORDER BUMPS ══ -->
+  <section id="adicionais" class="pb-24 px-6 max-w-7xl mx-auto">
+    <div class="flex items-center gap-4 mb-10">
+      <span class="material-symbols-outlined text-primary-container text-4xl">add_box</span>
+      <h2 class="text-4xl font-bold tracking-tight">Incremente seu Pedido</h2>
+    </div>
+    <div class="grid grid-cols-1 md:grid-cols-12 gap-6">
+
+      <!-- Banner Avulso -->
+      <div class="md:col-span-5 bg-surface-container-low p-10 flex flex-col justify-between hover:bg-surface-container-lowest transition-colors group cursor-pointer">
+        <div>
+          <div class="flex justify-between items-start mb-6">
+            <span class="material-symbols-outlined text-4xl text-on-surface-variant">branding_watermark</span>
+            <div class="bg-on-surface text-surface-container-lowest px-3 py-1 text-sm font-bold uppercase tracking-wider">Upgrade</div>
+          </div>
+          <h3 class="text-3xl font-bold mb-4">Banner Avulso</h3>
+          <p class="text-on-surface-variant mb-8 leading-relaxed">Banner para datas comemorativas ou campanhas pontuais. Criado no tamanho certo para sua página.</p>
+        </div>
+        <div class="flex items-end justify-between">
+          <div>
+            <span class="text-sm uppercase font-bold text-on-surface-variant block">Por apenas</span>
+            <span class="text-4xl font-black">R$ 80</span>
+          </div>
+          <a href="https://wa.me/5575999435150?text=Oi" target="_blank"
+             class="bg-on-surface text-surface-container-lowest w-12 h-12 flex items-center justify-center group-hover:bg-primary-container group-hover:text-on-primary-fixed transition-colors">
+            <span class="material-symbols-outlined">add</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- Kit 3 Banners -->
+      <div class="md:col-span-7 bg-on-surface text-surface-container-lowest p-10 flex flex-col justify-between relative overflow-hidden group cursor-pointer">
+        <div class="relative z-10">
+          <div class="flex justify-between items-start mb-6">
+            <span class="material-symbols-outlined text-4xl text-primary-container" style="font-variation-settings: 'FILL' 1;">auto_awesome_motion</span>
+            <div class="bg-primary-container text-on-primary-fixed px-3 py-1 text-sm font-bold uppercase tracking-wider">Mais Pedido</div>
+          </div>
+          <h3 class="text-5xl font-bold mb-4 italic tracking-tighter">Kit 3 Banners</h3>
+          <p class="text-surface-variant/70 mb-8 max-w-md text-lg leading-relaxed">Três banners temáticos com identidade visual unificada. Planeje o trimestre de uma vez.</p>
+        </div>
+        <div class="relative z-10 flex items-end justify-between">
+          <div>
+            <span class="text-sm uppercase font-bold text-surface-variant block">Kit completo</span>
+            <span class="text-6xl font-black text-primary-container">R$ 200</span>
+          </div>
+          <a href="https://wa.me/5575999435150?text=Oi" target="_blank"
+             class="bg-primary-container text-on-primary-fixed px-8 py-4 font-bold flex items-center gap-2 hover:opacity-90 transition-opacity">
+            ADICIONAR AO KIT <span class="material-symbols-outlined">shopping_cart_checkout</span>
+          </a>
+        </div>
+        <div class="absolute -right-20 -bottom-20 opacity-10 pointer-events-none">
+          <span class="material-symbols-outlined text-[300px]">layers</span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ══ PAGAMENTO + PRAZO ══ -->
+  <section id="pagamento" class="pb-24 px-6 max-w-7xl mx-auto">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-20 items-start">
+
+      <!-- Pagamento -->
+      <div class="space-y-12">
+        <div>
+          <h2 class="text-4xl font-bold tracking-tight mb-8">Condições de Pagamento</h2>
+          <div class="space-y-4">
+            <!-- PIX -->
+            <div class="bg-surface-container-low p-8 border-l-4 border-primary-container flex items-center justify-between">
+              <div class="flex items-center gap-6">
+                <span class="material-symbols-outlined text-4xl text-on-surface">qr_code_2</span>
+                <div>
+                  <h4 class="font-bold text-xl uppercase tracking-tight">PIX à Vista</h4>
+                  <p class="text-on-surface-variant">Aprovação imediata do briefing.</p>
+                </div>
+              </div>
+              <div class="text-right">
+                <span class="text-primary font-black text-2xl">-10% OFF</span>
+              </div>
+            </div>
+            <!-- Cartão -->
+            <div class="bg-surface-container-low p-8 flex items-center justify-between">
+              <div class="flex items-center gap-6">
+                <span class="material-symbols-outlined text-4xl text-on-surface">credit_card</span>
+                <div>
+                  <h4 class="font-bold text-xl uppercase tracking-tight">Cartão de Crédito</h4>
+                  <p class="text-on-surface-variant">Parcelamento sem burocracia.</p>
+                </div>
+              </div>
+              <div class="text-right">
+                <span class="font-bold text-xl">Até 5x <br/><span class="text-sm text-on-surface-variant">Sem Juros</span></span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <a href="https://wa.me/5575999435150?text=Oi" target="_blank"
+           class="block w-full bg-primary-container text-on-primary-fixed py-8 text-2xl font-black uppercase tracking-widest text-center hover:brightness-110 transition-all shadow-xl shadow-primary-container/20">
+          Finalizar Contratação Agora
+        </a>
+      </div>
+
+      <!-- Prazo -->
+      <div class="bg-surface-container-high p-12 lg:mt-24">
+        <div class="mb-12">
+          <span class="label-md text-primary font-black">Cronograma</span>
+          <h2 class="text-4xl font-bold tracking-tight mt-2">Entrega Recorde</h2>
+        </div>
+        <div class="relative border-l-2 border-on-surface/10 ml-4 space-y-12">
+          <div class="relative pl-10">
+            <div class="absolute -left-[11px] top-0 w-5 h-5 bg-on-surface"></div>
+            <h4 class="font-bold text-lg uppercase">Aprovação do Briefing</h4>
+            <p class="text-on-surface-variant mt-2">Alinhamos todos os detalhes do seu projeto.</p>
+          </div>
+          <div class="relative pl-10">
+            <div class="absolute -left-[11px] top-0 w-5 h-5 bg-primary-container"></div>
+            <h4 class="font-bold text-lg uppercase">Criação</h4>
+            <p class="text-on-surface-variant mt-2">Nossa equipe desenvolve sua página com foco em resultado.</p>
+          </div>
+          <div class="relative pl-10">
+            <div class="absolute -left-[11px] top-0 w-5 h-5 bg-on-surface"></div>
+            <h4 class="font-bold text-lg uppercase italic">Entrega Final</h4>
+            <p class="text-on-surface-variant mt-2 font-bold text-on-surface">Em até <span class="bg-primary-container px-1">5 Dias Úteis</span> após o início.</p>
+          </div>
+        </div>
+        <div class="mt-16 flex items-center gap-4 p-4 bg-surface-container-lowest outline outline-1 outline-on-surface/5">
+          <span class="material-symbols-outlined text-primary-container" style="font-variation-settings: 'FILL' 1;">verified</span>
+          <span class="text-sm font-bold uppercase tracking-wide">Satisfação Garantida — Ad Expand</span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Trust Bar -->
+  <section class="px-6 max-w-7xl mx-auto mt-16 pt-16 border-t border-outline-variant/20 flex flex-wrap justify-center gap-16 grayscale opacity-60">
+    <div class="flex items-center gap-2">
+      <span class="material-symbols-outlined text-3xl">security</span>
+      <span class="font-bold uppercase tracking-tighter">Pagamento Seguro</span>
+    </div>
+    <div class="flex items-center gap-2">
+      <span class="material-symbols-outlined text-3xl">bolt</span>
+      <span class="font-bold uppercase tracking-tighter">Start Imediato</span>
+    </div>
+    <div class="flex items-center gap-2">
+      <span class="material-symbols-outlined text-3xl">support_agent</span>
+      <span class="font-bold uppercase tracking-tighter">Suporte VIP</span>
+    </div>
+  </section>
+
+</main>
+
+<!-- Footer -->
+<footer class="w-full py-20 bg-stone-100 dark:bg-stone-900">
+  <div class="flex flex-col md:flex-row justify-between items-center px-12 max-w-7xl mx-auto gap-8">
+    <div class="text-xl font-black text-stone-900 dark:text-stone-50">Ad Expand</div>
+    <div class="flex gap-10 font-['Work_Sans'] text-sm tracking-wide uppercase">
+      <a class="text-stone-500 dark:text-stone-400 hover:text-amber-400 transition-colors" href="https://wa.me/5575999435150?text=Oi" target="_blank">Fale Conosco</a>
+    </div>
+    <div class="text-stone-500 dark:text-stone-400 font-['Work_Sans'] text-sm tracking-wide uppercase">© 2025 Ad Expand.</div>
+  </div>
+</footer>
+
+</body></html>
