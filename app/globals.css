@@ -1,0 +1,170 @@
+@import "tailwindcss";
+
+:root {
+  /* Base escura */
+  --ink-950: #0A0A0B;
+  --ink-900: #111113;
+  --ink-800: #1A1A1D;
+  --ink-700: #26262B;
+
+  /* Dourado */
+  --gold-500: #FFC107;
+  --gold-400: #FFD54F;
+  --gold-600: #D4A003;
+  --gold-glow: rgba(255, 193, 7, 0.35);
+
+  /* Neutros claros */
+  --paper-50: #FAFAF9;
+  --paper-100: #F3F2EF;
+  --paper-200: #E7E5E1;
+
+  /* Semânticos */
+  --text-on-dark: #F5F5F4;
+  --text-on-dark-muted: #A8A29E;
+  --text-on-light: #0A0A0B;
+  --text-on-light-muted: #57534E;
+
+  /* Tipografia fluida */
+  --text-hero: clamp(2.5rem, 8vw, 6rem);
+  --text-display: clamp(2rem, 5vw, 4rem);
+  --text-h3: clamp(1.5rem, 3vw, 2.25rem);
+  --text-lead: clamp(1.05rem, 1.8vw, 1.25rem);
+
+  --background: var(--ink-950);
+  --foreground: var(--text-on-dark);
+}
+
+@theme inline {
+  --color-ink-950: var(--ink-950);
+  --color-ink-900: var(--ink-900);
+  --color-ink-800: var(--ink-800);
+  --color-ink-700: var(--ink-700);
+  --color-gold-500: var(--gold-500);
+  --color-gold-400: var(--gold-400);
+  --color-gold-600: var(--gold-600);
+  --color-paper-50: var(--paper-50);
+  --color-paper-100: var(--paper-100);
+  --color-paper-200: var(--paper-200);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-display: var(--font-space-grotesk);
+  --font-sans: var(--font-inter);
+  --font-mono: var(--font-geist-mono);
+}
+
+* {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+html {
+  background: var(--ink-950);
+  color: var(--text-on-dark);
+}
+
+body {
+  background: var(--ink-950);
+  color: var(--text-on-dark);
+  font-family: var(--font-inter), system-ui, sans-serif;
+  overflow-x: hidden;
+}
+
+/* Headlines display */
+.font-display {
+  font-family: var(--font-space-grotesk), system-ui, sans-serif;
+  letter-spacing: -0.04em;
+  line-height: 0.95;
+}
+
+.font-mono {
+  font-family: var(--font-geist-mono), ui-monospace, monospace;
+}
+
+/* Hero fluid sizes */
+.text-hero { font-size: var(--text-hero); }
+.text-display { font-size: var(--text-display); }
+.text-h3 { font-size: var(--text-h3); }
+.text-lead { font-size: var(--text-lead); }
+
+/* Noise texture overlay */
+.noise-overlay {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.035;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%25' height='100%25' filter='url(%23n)' opacity='0.9'/></svg>");
+  background-size: 200px;
+}
+
+/* Gold glow util */
+.glow-gold {
+  box-shadow: 0 0 80px -20px var(--gold-glow);
+}
+
+/* Marquee keyframes */
+@keyframes marquee-x {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+@keyframes marquee-x-rev {
+  from { transform: translateX(-50%); }
+  to   { transform: translateX(0); }
+}
+.marquee-track {
+  animation: marquee-x 40s linear infinite;
+  will-change: transform;
+}
+.marquee-track-rev {
+  animation: marquee-x-rev 55s linear infinite;
+  will-change: transform;
+}
+.marquee-track:hover,
+.marquee-track-rev:hover {
+  animation-play-state: paused;
+}
+
+/* CTA pulse (mockup browser only) */
+@keyframes soft-pulse {
+  0%, 100% { transform: scale(1); box-shadow: 0 0 0 0 var(--gold-glow); }
+  50% { transform: scale(1.02); box-shadow: 0 0 0 14px rgba(255,193,7,0); }
+}
+.animate-soft-pulse {
+  animation: soft-pulse 2.4s ease-in-out infinite;
+}
+
+/* Custom cursor (desktop only) */
+@media (hover: hover) and (pointer: fine) {
+  .has-cursor * { cursor: none !important; }
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+  .marquee-track, .marquee-track-rev { animation: none !important; }
+}
+
+/* Selection */
+::selection {
+  background: var(--gold-500);
+  color: var(--ink-950);
+}
+
+/* Focus ring */
+*:focus-visible {
+  outline: 2px solid var(--gold-500);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* Hide scrollbar on marquee parent */
+.marquee-mask {
+  mask-image: linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent);
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent);
+}

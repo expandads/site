@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 110" fill="none" role="img" aria-label="ad expand">
+  <g fill="currentColor">
+    <path d="M8 8 h46 a42 42 0 0 1 42 42 v8 a42 42 0 0 1 -42 42 h-46 z M20 20 v68 h34 a30 30 0 0 0 30-30 v-8 a30 30 0 0 0 -30-30 z" fill-rule="evenodd"/>
+    <path d="M56 20 v68" stroke="currentColor" stroke-width="12"/>
+  </g>
+  <text x="130" y="84" font-family="'Space Grotesk', system-ui, sans-serif" font-weight="800" font-size="92" letter-spacing="-4" fill="currentColor">expand</text>
+</svg>
