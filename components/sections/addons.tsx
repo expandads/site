@@ -17,10 +17,16 @@ export function Addons() {
           </Reveal>
           <Reveal delay={0.08}>
             <h2 className="font-display text-display font-bold">
-              Precisa de banner
+              Vai rodar mais variações
               <br />
-              pra campanha? <span className="text-[color:var(--gold-600)]">Pegamos.</span>
+              da sua página? <span className="text-[color:var(--gold-600)]">A gente faz os banners.</span>
             </h2>
+          </Reveal>
+          <Reveal delay={0.16}>
+            <p className="text-lead text-[color:var(--text-on-light-muted)] mt-5 max-w-[60ch] leading-relaxed">
+              Todo pacote já sai com um banner inicial. Se quiser testar outras ofertas,
+              públicos ou criativos pra campanha, a gente produz os banners extras pra você.
+            </p>
           </Reveal>
         </div>
 
@@ -32,7 +38,7 @@ export function Addons() {
               </div>
               <h3 className="font-display text-2xl md:text-3xl font-bold mb-2">Banner Avulso</h3>
               <p className="text-[color:var(--text-on-light-muted)] mb-8 leading-relaxed">
-                Criativo único pra campanha pontual. Entrega em 2 dias úteis.
+                Um criativo extra pra testar uma oferta ou público novo. Entrega em 2 dias úteis.
               </p>
 
               <div className="mt-auto pt-6 border-t border-[color:var(--paper-200)]">
@@ -56,8 +62,7 @@ export function Addons() {
           </Reveal>
 
           <Reveal delay={0.1} className="md:col-span-7">
-            <div className="relative bg-[color:var(--ink-950)] text-[color:var(--text-on-dark)] border border-[color:var(--ink-800)] rounded-3xl p-7 md:p-10 h-full flex flex-col glow-gold overflow-hidden">
-              <div className="absolute -top-20 -right-20 w-64 h-64 rounded-full bg-[color:var(--gold-500)]/15 blur-3xl pointer-events-none" />
+            <div className="relative bg-[color:var(--ink-950)] text-[color:var(--text-on-dark)] border border-[color:var(--gold-500)]/40 rounded-3xl p-7 md:p-10 h-full flex flex-col overflow-hidden">
               <div className="relative flex-1">
                 <span className="inline-block bg-[color:var(--gold-500)] text-[color:var(--ink-950)] text-[10px] font-bold tracking-widest uppercase px-3 py-1 rounded-full mb-6">
                   Mais pedido
@@ -72,8 +77,8 @@ export function Addons() {
                       Kit 3 Banners
                     </h3>
                     <p className="text-[color:var(--text-on-dark-muted)] leading-relaxed">
-                      Três criativos variados pra testar no Meta e Google. Perfeito pra começar
-                      uma campanha com A/B real desde o dia 1.
+                      Três criativos variados pra rodar no Meta e no Google. Ideal pra testar
+                      ofertas e públicos diferentes sem esperar por cada peça.
                     </p>
                   </div>
                 </div>

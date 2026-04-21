@@ -30,11 +30,11 @@ const SITE_URL = "https://adexpand.com.br";
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default: "Ad Expand — Landing pages que convertem tráfego pago em clientes",
-    template: "%s — Ad Expand",
+    default: "Ad Expand | Landing pages que convertem tráfego pago em clientes",
+    template: "%s | Ad Expand",
   },
   description:
-    "Agência especialista em landing pages de alta conversão para Meta Ads e Google Ads. Página no ar em até 5 dias úteis. Sem mensalidade abusiva, sem enrolação.",
+    "Agência especialista em landing pages de alta conversão para Meta Ads e Google Ads. Página no ar em até 5 dias úteis. Feito pra converter.",
   keywords: [
     "landing page",
     "tráfego pago",
@@ -50,23 +50,23 @@ export const metadata: Metadata = {
     locale: "pt_BR",
     url: SITE_URL,
     siteName: "Ad Expand",
-    title: "Ad Expand — Landing pages que convertem",
+    title: "Ad Expand | Landing pages que convertem",
     description:
-      "Transformamos clique pago em cliente pagante. No ar em até 5 dias úteis.",
+      "Transformamos seu tráfego pago em cliente real. No ar em até 5 dias úteis.",
     images: [
       {
         url: "/og-image.png",
         width: 1200,
         height: 630,
-        alt: "Ad Expand — Landing pages de alta conversão",
+        alt: "Ad Expand | Landing pages de alta conversão",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Ad Expand — Landing pages que convertem",
+    title: "Ad Expand | Landing pages que convertem",
     description:
-      "Transformamos clique pago em cliente pagante. No ar em até 5 dias úteis.",
+      "Transformamos seu tráfego pago em cliente real. No ar em até 5 dias úteis.",
     images: ["/og-image.png"],
   },
   robots: { index: true, follow: true },
@@ -97,7 +97,7 @@ export default function RootLayout({
       <body className="bg-ink-950 text-[color:var(--text-on-dark)] min-h-screen">
         {children}
 
-        {/* Meta Pixel — lazy */}
+        {/* Meta Pixel (lazy) */}
         {PIXEL_ID && (
           <Script id="meta-pixel" strategy="lazyOnload">
             {`!function(f,b,e,v,n,t,s)

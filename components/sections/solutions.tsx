@@ -85,7 +85,7 @@ export function Solutions() {
           <Reveal delay={0.16}>
             <p className="text-lead text-[color:var(--text-on-dark-muted)] max-w-[65ch] leading-relaxed">
               Escolha o modelo certo pro seu funil. Se tiver dúvida, a gente te orienta
-              no WhatsApp — sem compromisso.
+              no WhatsApp, sem compromisso.
             </p>
           </Reveal>
         </div>
@@ -103,7 +103,7 @@ export function Solutions() {
                   className={cn(
                     "group relative rounded-3xl border p-7 md:p-8 transition-all duration-300 hover:-translate-y-1 h-full flex flex-col",
                     p.featured
-                      ? "bg-gradient-to-br from-[color:var(--ink-900)] to-[color:var(--ink-950)] border-[color:var(--gold-500)]/40 hover:border-[color:var(--gold-500)] glow-gold"
+                      ? "bg-[color:var(--ink-900)] border-[color:var(--gold-500)]/50 hover:border-[color:var(--gold-500)]"
                       : "bg-[color:var(--ink-900)] border-[color:var(--ink-800)] hover:border-[color:var(--gold-500)]/60",
                   )}
                 >
@@ -168,7 +168,7 @@ export function Solutions() {
 
         {/* Mensalidade banner */}
         <Reveal delay={0.4} className="mt-6">
-          <div className="flex flex-col md:flex-row items-start md:items-center gap-5 md:gap-8 rounded-3xl border border-[color:var(--ink-800)] bg-gradient-to-r from-[color:var(--ink-900)] to-transparent px-6 md:px-10 py-6 md:py-8">
+          <div className="flex flex-col md:flex-row items-start md:items-center gap-5 md:gap-8 rounded-3xl border border-[color:var(--ink-800)] bg-[color:var(--ink-900)] px-6 md:px-10 py-6 md:py-8">
             <div className="w-12 h-12 rounded-2xl bg-[color:var(--ink-950)] border border-[color:var(--gold-500)]/40 text-[color:var(--gold-500)] flex items-center justify-center shrink-0">
               <InfinityIcon className="w-5 h-5" />
             </div>

@@ -1,31 +1,40 @@
 import { AlertTriangle, TrendingDown, Hourglass } from "lucide-react";
 import { Reveal } from "@/components/primitives/reveal";
+import { MoneyBurn } from "@/components/primitives/money-burn";
 
 const problems = [
   {
     n: "01",
     icon: AlertTriangle,
-    title: "Design bonito, lead nenhum",
-    body: "Agência comum entrega portfólio. Conversão cai, CPC sobe, e o CAC explode.",
+    title: "Bonita, mas não vende",
+    body: "A página impressiona no portfólio da agência. Só que o visitante entra, não entende o que fazer, e vai embora.",
   },
   {
     n: "02",
     icon: TrendingDown,
-    title: "Mobile quebrado",
-    body: "83% do tráfego é mobile. Se a página trava no celular, o dinheiro do anúncio vira boleto.",
+    title: "Trava no celular",
+    body: "A maioria do seu público entra pelo celular. Se demora pra abrir ou some o botão, o anúncio foi dinheiro jogado fora.",
   },
   {
     n: "03",
     icon: Hourglass,
-    title: "Entrega eterna",
-    body: "Mês pra aprovar layout, outro pra subir. Enquanto isso, o concorrente já escalou a campanha.",
+    title: "Demora pra sair do papel",
+    body: "Enquanto a agência arrasta a entrega por semanas, o concorrente já está no ar vendendo.",
   },
 ];
 
 export function Problem() {
   return (
-    <section className="relative bg-[color:var(--paper-50)] text-[color:var(--text-on-light)] py-20 md:py-32">
-      <div className="max-w-[1280px] mx-auto px-6 md:px-10">
+    <section className="relative bg-[color:var(--paper-50)] text-[color:var(--text-on-light)] py-20 md:py-32 overflow-hidden">
+      {/* Ilustração de dinheiro queimando (decorativa) */}
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute -right-16 top-10 w-[380px] h-[420px] text-[color:var(--text-on-light-muted)] opacity-[0.06] hidden md:block"
+      >
+        <MoneyBurn />
+      </div>
+
+      <div className="relative max-w-[1280px] mx-auto px-6 md:px-10">
         <div className="max-w-[760px] mb-14 md:mb-20">
           <Reveal>
             <span className="font-mono text-xs tracking-[0.2em] uppercase text-[color:var(--text-on-light-muted)] mb-4 block">
@@ -34,22 +43,21 @@ export function Problem() {
           </Reveal>
           <Reveal delay={0.08}>
             <h2 className="font-display text-display font-bold mb-6">
-              Você paga caro o clique.
+              Você paga caro pelo clique.
               <br />
-              Sua página joga <span className="italic text-[color:var(--gold-600)]">fora</span>.
+              Mas sua página joga o <span className="italic text-[color:var(--gold-600)]">lead fora</span>.
             </h2>
           </Reveal>
           <Reveal delay={0.16}>
             <div className="space-y-4 text-lead text-[color:var(--text-on-light-muted)] max-w-[65ch] leading-relaxed">
               <p>
-                Agência comum entrega &quot;site bonito&quot;. Você sobe pra campanha,
-                o CPC sobe junto, e a conversão fica abaixo da média do mercado (6,6%).
-                Resultado: CAC inflacionado, margem derretida, e aquela sensação de que
-                tráfego pago &quot;não funciona pro seu negócio&quot;.
+                Você investe no anúncio, a pessoa clica e chega no seu site.
+                Só que a página não conversa com ela, não deixa claro o próximo passo
+                e, no celular, mal carrega direito. O visitante fecha, e você pagou por isso.
               </p>
               <p>
-                Spoiler: funciona. O que não funciona é transformar visitante em espectador.
-                Landing page não é portfólio — é máquina de decisão.
+                Landing page não é vitrine bonita pra impressionar. É uma ferramenta pra virar
+                tráfego em cliente. Quando é feita direito, o mesmo anúncio vende mais.
               </p>
             </div>
           </Reveal>

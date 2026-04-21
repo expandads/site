@@ -23,7 +23,12 @@ export function WordSwap({
   const widest = words.reduce((a, b) => (a.length >= b.length ? a : b));
 
   return (
-    <span className={cn("relative inline-block align-baseline overflow-hidden", className)}>
+    <span
+      className={cn(
+        "relative inline-block align-baseline overflow-hidden leading-[1.15] pb-[0.18em] -mb-[0.18em]",
+        className,
+      )}
+    >
       <span className="invisible" aria-hidden="true">{widest}</span>
       <AnimatePresence mode="popLayout" initial={false}>
         <motion.span

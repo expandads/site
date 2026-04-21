@@ -34,18 +34,11 @@ const columns = [
     title: "Contato",
     links: [
       {
-        label: "WhatsApp — (75) 99943-5150",
+        label: "WhatsApp: (75) 99943-5150",
         href: waLink(waMessages.nav),
         external: true,
       },
       { label: "contato@adexpand.com.br", href: "mailto:contato@adexpand.com.br" },
-    ],
-  },
-  {
-    title: "Legal",
-    links: [
-      { label: "Política de Privacidade", href: "/privacidade" },
-      { label: "Termos de Uso", href: "/termos" },
     ],
   },
 ];
@@ -63,7 +56,7 @@ export function Footer() {
           </p>
         </div>
 
-        <div className="grid md:grid-cols-4 gap-10 mb-12 pb-10 border-b border-[color:var(--ink-800)]">
+        <div className="grid md:grid-cols-3 gap-10 mb-12 pb-10 border-b border-[color:var(--ink-800)]">
           {columns.map((c) => (
             <div key={c.title}>
               <h4 className="font-mono text-xs tracking-[0.2em] uppercase text-[color:var(--gold-500)] mb-4">
@@ -120,11 +113,8 @@ export function Footer() {
           </div>
         </div>
 
-        <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 text-xs text-[color:var(--text-on-dark-muted)]">
-          <div>© {new Date().getFullYear()} Ad Expand. Todos os direitos reservados.</div>
-          <div className="font-mono">
-            Feito com atenção aos detalhes em Salvador, BA.
-          </div>
+        <div className="text-center text-xs text-[color:var(--text-on-dark-muted)]">
+          © {new Date().getFullYear()} Expand Ad. Todos os direitos reservados.
         </div>
       </div>
     </footer>

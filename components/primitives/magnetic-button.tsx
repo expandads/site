@@ -53,8 +53,8 @@ export const MagneticButton = forwardRef<HTMLAnchorElement, Props>(function Magn
     const rect = el.getBoundingClientRect();
     const relX = e.clientX - rect.left - rect.width / 2;
     const relY = e.clientY - rect.top - rect.height / 2;
-    x.set(relX * 0.25);
-    y.set(relY * 0.3);
+    x.set(relX * 0.08);
+    y.set(relY * 0.1);
   }
 
   function handleMouseLeave() {

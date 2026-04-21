@@ -1,11 +1,13 @@
 import { Marquee } from "@/components/primitives/marquee";
 
 const stats = [
-  "+120 páginas entregues",
-  "Taxa média de 22% de conversão",
-  "4.9★ de satisfação",
   "Entrega em 5 dias úteis",
   "Mobile-first por padrão",
+  "Responsivo em qualquer tela",
+  "Carregamento otimizado",
+  "Rastreio pronto no lançamento",
+  "Integração com WhatsApp",
+  "Código limpo e editável",
 ];
 
 const tools = [

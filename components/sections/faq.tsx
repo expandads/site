@@ -14,12 +14,8 @@ const faqs = [
     a: "Sim. A mensalidade (R$ 100) já cobre hospedagem e domínio, mas se você já tem um domínio próprio a gente configura na hora.",
   },
   {
-    q: "E se eu não gostar do resultado?",
-    a: "Você tem 7 dias pra pedir reembolso integral, sem burocracia. Nossa meta é entregar uma página que converte — se não rolar, devolvemos o valor.",
-  },
-  {
     q: "Vocês rodam o tráfego também?",
-    a: "Focamos só em landing pages. Mas indicamos parceiros de confiança pra gestão de Meta/Google se você precisar.",
+    a: "Sim. A gestão de tráfego (Meta e Google) é um serviço à parte, contratado separadamente. Se fizer sentido pra você, combinamos no WhatsApp.",
   },
   {
     q: "Fornecem o código-fonte?",
