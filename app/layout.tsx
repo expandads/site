@@ -89,7 +89,7 @@ export const viewport: Viewport = {
 export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
-  const PIXEL_ID = process.env.NEXT_PUBLIC_META_PIXEL_ID;
+  const PIXEL_ID = process.env.NEXT_PUBLIC_META_PIXEL_ID || "850849537977072";
   const GA_ID = process.env.NEXT_PUBLIC_GA_ID;
 
   return (
