@@ -10,6 +10,7 @@ import { PricingCta } from "@/components/sections/pricing-cta";
 import { Faq } from "@/components/sections/faq";
 import { Footer } from "@/components/sections/footer";
 import { StickyCtaMobile } from "@/components/primitives/sticky-cta-mobile";
+import { EngagementTracker } from "@/components/primitives/engagement-tracker";
 
 export default function Home() {
   return (
@@ -28,6 +29,7 @@ export default function Home() {
       </main>
       <Footer />
       <StickyCtaMobile />
+      <EngagementTracker />
     </>
   );
 }
