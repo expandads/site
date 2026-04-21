@@ -12,10 +12,15 @@ import { waLink, waMessages } from "@/lib/whatsapp";
 export function Hero() {
   return (
     <section id="top" className="relative pt-28 md:pt-40 pb-20 md:pb-32 overflow-hidden">
-      {/* Mapa do Brasil decorativo (muito sutil) */}
+      {/*
+        Mapa do Brasil decorativo.
+        A ponta fica acima/ao lado do "Landing pages" e o contorno
+        desce passando à direita do texto. Metade do mapa fica cortada
+        pela esquerda (-left) pra dar ideia de "expansao saindo do BR".
+      */}
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute -right-24 top-1/2 -translate-y-1/2 w-[520px] h-[560px] text-[color:var(--gold-500)] opacity-[0.05] hidden md:block"
+        className="pointer-events-none absolute -left-[30%] sm:-left-[22%] md:-left-[8%] lg:-left-[2%] -top-10 md:-top-16 w-[110%] sm:w-[90%] md:w-[640px] lg:w-[680px] h-auto text-[color:var(--gold-500)] opacity-[0.12] md:opacity-[0.10]"
       >
         <BrazilMap />
       </div>
@@ -36,7 +41,7 @@ export function Hero() {
             Não pra{" "}
             <WordSwap
               words={["impressionar", "decorar", "ganhar prêmio"]}
-            />.
+            />
           </motion.h1>
 
           <motion.p

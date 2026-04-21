@@ -104,19 +104,19 @@ body {
 
 /* Marquee keyframes */
 @keyframes marquee-x {
-  from { transform: translateX(0); }
-  to   { transform: translateX(-50%); }
+  0%   { transform: translate3d(0, 0, 0); }
+  100% { transform: translate3d(-50%, 0, 0); }
 }
 @keyframes marquee-x-rev {
-  from { transform: translateX(-50%); }
-  to   { transform: translateX(0); }
+  0%   { transform: translate3d(-50%, 0, 0); }
+  100% { transform: translate3d(0, 0, 0); }
 }
 .marquee-track {
-  animation: marquee-x 40s linear infinite;
+  animation: marquee-x 28s linear infinite;
   will-change: transform;
 }
 .marquee-track-rev {
-  animation: marquee-x-rev 55s linear infinite;
+  animation: marquee-x-rev 34s linear infinite;
   will-change: transform;
 }
 .marquee-track:hover,
