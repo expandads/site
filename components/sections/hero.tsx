@@ -39,7 +39,7 @@ export function Hero() {
             <br />
             Não pra{" "}
             <WordSwap
-              words={["impressionar", "decorar", "ganhar prêmio"]}
+              words={["impressionar", "decorar", "virar portfólio"]}
             />
           </motion.h1>
 

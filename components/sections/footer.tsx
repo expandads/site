@@ -1,5 +1,8 @@
+"use client";
+
 import { Mail } from "lucide-react";
 import { Logo } from "@/components/primitives/logo";
+import { trackLead } from "@/lib/pixel";
 
 function InstagramIcon(props: React.SVGProps<SVGSVGElement>) {
   return (
@@ -37,6 +40,7 @@ const columns = [
         label: "WhatsApp: (75) 99943-5150",
         href: waLink(waMessages.nav),
         external: true,
+        lead: "footer" as const,
       },
       { label: "contato@adexpand.com.br", href: "mailto:contato@adexpand.com.br" },
     ],
@@ -69,6 +73,11 @@ export function Footer() {
                       href={l.href}
                       target={"external" in l && l.external ? "_blank" : undefined}
                       rel={"external" in l && l.external ? "noopener noreferrer" : undefined}
+                      onClick={
+                        "lead" in l && l.lead
+                          ? () => trackLead(l.lead as string)
+                          : undefined
+                      }
                       className="text-sm text-[color:var(--text-on-dark-muted)] hover:text-[color:var(--gold-500)] transition-colors"
                     >
                       {l.label}

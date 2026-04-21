@@ -3,7 +3,7 @@
 import { ShieldCheck, Percent, CreditCard, Clock, ArrowRight, Lock } from "lucide-react";
 import { Reveal } from "@/components/primitives/reveal";
 import { waLink, waMessages } from "@/lib/whatsapp";
-import { trackCheckout } from "@/lib/pixel";
+import { trackCheckout, trackLead } from "@/lib/pixel";
 import { NoiseOverlay } from "@/components/primitives/noise-overlay";
 
 const conditions = [
@@ -100,7 +100,10 @@ export function PricingCta() {
                   href={waLink(waMessages.final)}
                   target="_blank"
                   rel="noopener noreferrer"
-                  onClick={() => trackCheckout("final_cta")}
+                  onClick={() => {
+                    trackLead("final_cta");
+                    trackCheckout("final_cta");
+                  }}
                   className="group flex items-center justify-center gap-3 w-full rounded-2xl bg-[color:var(--gold-500)] hover:bg-[color:var(--gold-400)] text-[color:var(--ink-950)] px-6 py-6 md:py-7 font-display text-base md:text-xl font-bold transition-all hover:-translate-y-0.5"
                 >
                   QUERO FINALIZAR AGORA
