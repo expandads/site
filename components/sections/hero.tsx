@@ -13,14 +13,13 @@ export function Hero() {
   return (
     <section id="top" className="relative pt-28 md:pt-40 pb-20 md:pb-32 overflow-hidden">
       {/*
-        Mapa do Brasil decorativo.
-        A ponta fica acima/ao lado do "Landing pages" e o contorno
-        desce passando à direita do texto. Metade do mapa fica cortada
-        pela esquerda (-left) pra dar ideia de "expansao saindo do BR".
+        Mapa do Brasil decorativo (silhueta real).
+        Posicionado atras do texto: ponta norte acima do headline,
+        contorno descendo e passando a direita das palavras.
       */}
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute -left-[30%] sm:-left-[22%] md:-left-[8%] lg:-left-[2%] -top-10 md:-top-16 w-[110%] sm:w-[90%] md:w-[640px] lg:w-[680px] h-auto text-[color:var(--gold-500)] opacity-[0.12] md:opacity-[0.10]"
+        className="pointer-events-none absolute top-0 left-1/2 -translate-x-[58%] w-[720px] h-[720px] md:w-[820px] md:h-[820px] lg:w-[880px] lg:h-[880px] lg:left-[38%] lg:-translate-x-1/2 text-[color:var(--gold-500)] opacity-[0.09] md:opacity-[0.08]"
       >
         <BrazilMap />
       </div>
