@@ -19,7 +19,7 @@ const faqs = [
   },
   {
     q: "Fornecem o código-fonte?",
-    a: "Sim, no pacote sem mensalidade entregamos um .ZIP com tudo que você precisa pra subir em Hostinger, HostGator ou qualquer hospedagem compatível — é só subir os arquivos e rodar. No pacote com mensalidade, a página fica hospedada com a gente.",
+    a: "Sim, no pacote sem mensalidade entregamos um .ZIP com tudo que você precisa pra subir em Hostinger ou qualquer hospedagem compatível — é só subir os arquivos e rodar. No pacote com mensalidade, a página fica hospedada com a gente.",
   },
   {
     q: "O que acontece se eu cancelar a mensalidade?",
