@@ -20,13 +20,13 @@ const conditions = [
   },
   {
     icon: Clock,
-    title: "Entrega em 5 dias úteis",
+    title: "Entrega em até 5 dias úteis",
     body: "Contados da aprovação do briefing inicial.",
   },
   {
     icon: ShieldCheck,
-    title: "Satisfação garantida",
-    body: "Não gostou? Dinheiro de volta em até 7 dias.",
+    title: "Revisões até você aprovar",
+    body: "Ajustamos quantas vezes precisar até a página ficar do seu jeito.",
   },
 ];
 

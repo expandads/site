@@ -7,7 +7,7 @@ import { Reveal } from "@/components/primitives/reveal";
 const faqs = [
   {
     q: "Em quanto tempo fica pronto?",
-    a: "5 dias úteis a partir da aprovação do briefing. Pode acelerar sob demanda (combinamos no WhatsApp).",
+    a: "Em até 5 dias úteis a partir da aprovação do briefing. Pode acelerar sob demanda (combinamos no WhatsApp).",
   },
   {
     q: "Posso usar meu próprio domínio?",
@@ -15,11 +15,11 @@ const faqs = [
   },
   {
     q: "Vocês rodam o tráfego também?",
-    a: "Sim. A gestão de tráfego (Meta e Google) é um serviço à parte, contratado separadamente. Se fizer sentido pra você, combinamos no WhatsApp.",
+    a: "Sim. A gestão de tráfego (Meta e Google) é um serviço à parte, contratado separadamente. Também produzimos criativos estáticos sob demanda. Se fizer sentido pra você, combinamos no WhatsApp.",
   },
   {
     q: "Fornecem o código-fonte?",
-    a: "Sim, se você contratar o pacote sem mensalidade. Na mensalidade, a página fica hospedada com a gente e os arquivos ficam no nosso ambiente.",
+    a: "Sim, no pacote sem mensalidade entregamos um .ZIP com tudo que você precisa pra subir em Hostinger, HostGator ou qualquer hospedagem compatível — é só subir os arquivos e rodar. No pacote com mensalidade, a página fica hospedada com a gente.",
   },
   {
     q: "O que acontece se eu cancelar a mensalidade?",
@@ -27,11 +27,11 @@ const faqs = [
   },
   {
     q: "Atendem fora do Brasil?",
-    a: "Sim, desde que o atendimento seja via WhatsApp/Meet em português. Pagamento pode ser via PIX ou cartão internacional.",
+    a: "Sim. Pagamento pode ser via PIX ou cartão internacional.",
   },
   {
     q: "Tem contrato de fidelidade?",
-    a: "Não. Cancela quando quiser, sem justificativa.",
+    a: "Não. A mensalidade (hospedagem e domínio) pode ser cancelada a qualquer momento, sem multa nem justificativa.",
   },
 ];
 
