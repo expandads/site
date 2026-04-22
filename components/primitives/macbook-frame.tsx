@@ -39,10 +39,10 @@ export function MacbookFrame({
 }) {
   const scrollRef = useRef<HTMLDivElement>(null);
   const wrapperRef = useRef<HTMLDivElement>(null);
-  const [isHovering, setIsHovering] = useState(false);
+  const hoveringRef = useRef(false);
   const [isVisible, setIsVisible] = useState(false);
 
-  // Detecta visibilidade (>50% no viewport) pra ligar/desligar auto-scroll.
+  // Detecta visibilidade (>40% no viewport) pra ligar/desligar auto-scroll.
   useEffect(() => {
     const el = wrapperRef.current;
     if (!el) return;
@@ -54,26 +54,48 @@ export function MacbookFrame({
     return () => io.disconnect();
   }, []);
 
-  // Auto-scroll loop: 0 -> max em ~25s, pausa 1s no fim, volta ao topo rapido.
+  // Auto-scroll loop persistente: nao reseta em hover/touch.
+  // - Em hover: pausa ticks, mas mantem phase/posicao atual.
+  // - Ao sair do hover: re-sincroniza o timer com base no scrollTop atual
+  //   (o usuario pode ter rolado manualmente) e continua de onde estava.
+  // - Reset ao topo so acontece quando o ciclo natural completa (ao fim do "up").
   useEffect(() => {
     const el = scrollRef.current;
-    if (!el || !isVisible || isHovering) return;
+    if (!el || !isVisible) return;
 
-    let rafId = 0;
-    let startTs = 0;
     const DURATION_DOWN = 25000;
     const PAUSE_BOTTOM = 1200;
     const DURATION_UP = 900;
-    let phase: "down" | "pause" | "up" = "down";
-    let phaseStart = 0;
 
-    const max = () => el.scrollHeight - el.clientHeight;
+    let rafId = 0;
+    let phase: "down" | "pause" | "up" = "down";
+    let phaseStart = performance.now();
+    let wasHovering = false;
+
+    const max = () => Math.max(1, el.scrollHeight - el.clientHeight);
 
     const tick = (ts: number) => {
-      if (!startTs) {
-        startTs = ts;
-        phaseStart = ts;
+      if (hoveringRef.current) {
+        // Pausado: nao avanca nem mexe no scrollTop. Usuario pode rolar livre.
+        wasHovering = true;
+        rafId = requestAnimationFrame(tick);
+        return;
       }
+      if (wasHovering) {
+        // Saindo do hover: resincroniza a partir da posicao atual, continua descendo.
+        wasHovering = false;
+        const M = max();
+        const pct = el.scrollTop / M;
+        if (pct >= 0.995) {
+          // Ja estava no fim -> entra em pausa e depois volta ao topo.
+          phase = "pause";
+          phaseStart = ts;
+        } else {
+          phase = "down";
+          phaseStart = ts - pct * DURATION_DOWN;
+        }
+      }
+
       const elapsed = ts - phaseStart;
       const M = max();
 
@@ -102,7 +124,7 @@ export function MacbookFrame({
 
     rafId = requestAnimationFrame(tick);
     return () => cancelAnimationFrame(rafId);
-  }, [isVisible, isHovering]);
+  }, [isVisible]);
 
   return (
     <div className={cn("w-full", className)}>
@@ -110,9 +132,18 @@ export function MacbookFrame({
         ref={wrapperRef}
         className="relative w-full"
         style={{ aspectRatio: "1200 / 780" }}
-        onMouseEnter={() => setIsHovering(true)}
-        onMouseLeave={() => setIsHovering(false)}
-        onTouchStart={() => setIsHovering(true)}
+        onMouseEnter={() => {
+          hoveringRef.current = true;
+        }}
+        onMouseLeave={() => {
+          hoveringRef.current = false;
+        }}
+        onTouchStart={() => {
+          hoveringRef.current = true;
+        }}
+        onTouchEnd={() => {
+          hoveringRef.current = false;
+        }}
       >
         {/* Moldura SVG (absoluta, cobre todo o wrapper) */}
         <svg
