@@ -4,10 +4,13 @@ import { useEffect, useRef, useState } from "react";
 import { motion } from "motion/react";
 import { MacbookFrame } from "@/components/primitives/macbook-frame";
 import { CaseModal } from "@/components/primitives/case-modal";
+import { Flags, type FlagCode } from "@/components/primitives/flags";
 
 type CaseItem = {
   id: string;
   niche: string;
+  country: FlagCode;
+  countryName: string;
   src: string;
   alt: string;
   imgWidth: number;
@@ -18,6 +21,8 @@ const CASES: CaseItem[] = [
   {
     id: "riches",
     niche: "Joalheria de luxo",
+    country: "US",
+    countryName: "Estados Unidos",
     src: "/cases/screencapture-lp-richesjewelry.png",
     alt: "Landing page de joalheria de luxo",
     imgWidth: 1920,
@@ -26,6 +31,8 @@ const CASES: CaseItem[] = [
   {
     id: "uninassau",
     niche: "Ensino superior",
+    country: "BR",
+    countryName: "Brasil",
     src: "/cases/screencapture-lp-uninassau.png",
     alt: "Landing page de ensino superior",
     imgWidth: 1920,
@@ -121,7 +128,7 @@ export function Cases() {
                 imgWidth={c.imgWidth}
                 imgHeight={c.imgHeight}
                 onExpand={() => setOpenId(c.id)}
-                label={<NicheLabel niche={c.niche} />}
+                label={<NicheLabel item={c} />}
               />
             </motion.div>
           ))}
@@ -149,7 +156,7 @@ export function Cases() {
                   imgWidth={c.imgWidth}
                   imgHeight={c.imgHeight}
                   onExpand={() => setOpenId(c.id)}
-                  label={<NicheLabel niche={c.niche} />}
+                  label={<NicheLabel item={c} />}
                 />
               </div>
             ))}
@@ -199,11 +206,16 @@ export function Cases() {
   );
 }
 
-function NicheLabel({ niche }: { niche: string }) {
+function NicheLabel({ item }: { item: CaseItem }) {
+  const Flag = Flags[item.country];
   return (
-    <div className="text-center md:text-left">
+    <div className="flex items-center justify-center md:justify-start gap-2">
+      <Flag
+        className="w-5 h-[14px] rounded-[2px] ring-1 ring-white/10"
+        title={item.countryName}
+      />
       <span className="text-sm md:text-base font-medium text-[color:var(--gold-500)]">
-        {niche}
+        {item.niche}
       </span>
     </div>
   );
