@@ -11,12 +11,14 @@ import { cn } from "@/lib/utils";
  * suave enquanto esta no viewport, pausando em hover/touch sem resetar.
  */
 
-// Area de tela relativa ao viewBox 1200x780 (x=55, y=45, w=1090, h=660).
+// Area de tela relativa ao viewBox 1200x858 (x=55, y=50, w=1090, h=726).
+// Proporcoes do MacBook mantidas; viewBox esticado +10% em altura pra dar
+// mais espaco de preview dentro da tela.
 const SCREEN = {
-  top: "5.77%",
+  top: "5.83%",
   left: "4.58%",
   width: "90.83%",
-  height: "84.61%",
+  height: "84.62%",
 };
 
 export function MacbookFrame({
@@ -132,7 +134,7 @@ export function MacbookFrame({
       <div
         ref={wrapperRef}
         className="relative w-full"
-        style={{ aspectRatio: "1200 / 780" }}
+        style={{ aspectRatio: "1200 / 858" }}
         onMouseEnter={() => {
           hoveringRef.current = true;
         }}
@@ -151,47 +153,47 @@ export function MacbookFrame({
       >
         {/* Moldura SVG */}
         <svg
-          viewBox="0 0 1200 780"
+          viewBox="0 0 1200 858"
           className="absolute inset-0 w-full h-full pointer-events-none"
           aria-hidden="true"
           preserveAspectRatio="xMidYMid meet"
         >
           <defs>
             <linearGradient id="mbChassis" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0%" stopColor="#3a3a3e" />
-              <stop offset="100%" stopColor="#1f1f22" />
+              <stop offset="0%" stopColor="#4d4d52" />
+              <stop offset="100%" stopColor="#2a2a2d" />
             </linearGradient>
             <linearGradient id="mbBase" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0%" stopColor="#44444a" />
-              <stop offset="100%" stopColor="#1c1c1f" />
+              <stop offset="0%" stopColor="#525258" />
+              <stop offset="100%" stopColor="#2c2c30" />
             </linearGradient>
             <linearGradient id="mbGlare" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0%" stopColor="rgba(255,255,255,0.08)" />
+              <stop offset="0%" stopColor="rgba(255,255,255,0.1)" />
               <stop offset="100%" stopColor="rgba(255,255,255,0)" />
             </linearGradient>
           </defs>
 
           {/* Sombra base (ambient) */}
-          <ellipse cx="600" cy="770" rx="510" ry="8" fill="rgba(0,0,0,0.45)" />
+          <ellipse cx="600" cy="847" rx="510" ry="9" fill="rgba(0,0,0,0.45)" />
 
           {/* Chassis/bezel */}
           <rect
             x="0"
             y="0"
             width="1200"
-            height="740"
+            height="814"
             rx="22"
             ry="22"
             fill="url(#mbChassis)"
-            stroke="rgba(255,255,255,0.05)"
-            strokeWidth="1"
+            stroke="rgba(255,255,255,0.08)"
+            strokeWidth="1.5"
           />
           {/* Glare sutil topo */}
           <rect
             x="0"
             y="0"
             width="1200"
-            height="120"
+            height="132"
             rx="22"
             ry="22"
             fill="url(#mbGlare)"
@@ -199,29 +201,29 @@ export function MacbookFrame({
 
           {/* Notch centralizado no topo */}
           <path
-            d="M 540 45 L 540 55 Q 540 65 550 65 L 650 65 Q 660 65 660 55 L 660 45 Z"
+            d="M 540 50 L 540 61 Q 540 72 550 72 L 650 72 Q 660 72 660 61 L 660 50 Z"
             fill="#0a0a0b"
           />
 
           {/* Area da tela (fundo escuro atras do conteudo rolavel) */}
-          <rect x="55" y="45" width="1090" height="660" rx="6" ry="6" fill="#000" />
+          <rect x="55" y="50" width="1090" height="726" rx="6" ry="6" fill="#000" />
 
           {/* Base/hinge inferior */}
           <path
-            d="M 30 740 L 1170 740 L 1150 758 Q 1135 766 1120 766 L 80 766 Q 65 766 50 758 Z"
+            d="M 30 814 L 1170 814 L 1150 834 Q 1135 843 1120 843 L 80 843 Q 65 843 50 834 Z"
             fill="url(#mbBase)"
           />
           {/* Entalhe central da base */}
           <path
-            d="M 530 740 Q 530 754 545 754 L 655 754 Q 670 754 670 740 Z"
+            d="M 530 814 Q 530 829 545 829 L 655 829 Q 670 829 670 814 Z"
             fill="#0a0a0b"
           />
           {/* Linha divisoria chassis/base */}
           <line
             x1="0"
-            y1="740"
+            y1="814"
             x2="1200"
-            y2="740"
+            y2="814"
             stroke="rgba(0,0,0,0.7)"
             strokeWidth="1"
           />

@@ -1,40 +1,33 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { motion } from "motion/react";
 import { MacbookFrame } from "@/components/primitives/macbook-frame";
 import { CaseModal } from "@/components/primitives/case-modal";
 
 type CaseItem = {
   id: string;
-  client: string;
   niche: string;
-  result: string;
   src: string;
   alt: string;
   imgWidth: number;
   imgHeight: number;
-  liveUrl?: string;
 };
 
 const CASES: CaseItem[] = [
   {
     id: "riches",
-    client: "Riches Jewelry",
     niche: "Joalheria de luxo",
-    result: "Landing page de coleção premium com foco em captura qualificada",
     src: "/cases/screencapture-lp-richesjewelry.png",
-    alt: "Landing page Riches Jewelry",
+    alt: "Landing page de joalheria de luxo",
     imgWidth: 1920,
     imgHeight: 8155,
   },
   {
     id: "uninassau",
-    client: "UniNassau",
-    niche: "Educação · Graduação",
-    result: "Página de captação de alunos com funil de inscrição otimizado",
+    niche: "Ensino superior",
     src: "/cases/screencapture-lp-uninassau.png",
-    alt: "Landing page UniNassau",
+    alt: "Landing page de ensino superior",
     imgWidth: 1920,
     imgHeight: 8373,
   },
@@ -42,7 +35,44 @@ const CASES: CaseItem[] = [
 
 export function Cases() {
   const [openId, setOpenId] = useState<string | null>(null);
+  const [activeIndex, setActiveIndex] = useState(0);
+  const trackRef = useRef<HTMLDivElement>(null);
   const active = CASES.find((c) => c.id === openId) || null;
+
+  // Detecta qual slide esta centrado no carrossel mobile pra pintar o dot ativo.
+  useEffect(() => {
+    const track = trackRef.current;
+    if (!track) return;
+    const slides = track.querySelectorAll<HTMLElement>("[data-slide-index]");
+    if (!slides.length) return;
+
+    const io = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting && entry.intersectionRatio >= 0.6) {
+            const idx = Number(
+              entry.target.getAttribute("data-slide-index") ?? "0",
+            );
+            setActiveIndex(idx);
+          }
+        });
+      },
+      { root: track, threshold: [0.6] },
+    );
+    slides.forEach((s) => io.observe(s));
+    return () => io.disconnect();
+  }, []);
+
+  const goTo = (idx: number) => {
+    const track = trackRef.current;
+    if (!track) return;
+    const slide = track.querySelector<HTMLElement>(
+      `[data-slide-index="${idx}"]`,
+    );
+    if (slide) {
+      track.scrollTo({ left: slide.offsetLeft, behavior: "smooth" });
+    }
+  };
 
   return (
     <section
@@ -92,25 +122,27 @@ export function Cases() {
                 imgWidth={c.imgWidth}
                 imgHeight={c.imgHeight}
                 onExpand={() => setOpenId(c.id)}
-                label={<CaseLabel item={c} />}
+                label={<NicheLabel niche={c.niche} />}
               />
             </motion.div>
           ))}
         </div>
 
-        {/* Mobile: carrossel 1-por-vez com snap + fade indicativo na borda direita */}
-        <div className="md:hidden relative">
+        {/* Mobile: carrossel 1-por-vez, peek do proximo card + dots */}
+        <div className="md:hidden">
           <div
+            ref={trackRef}
             className="-mx-6 px-6 flex gap-4 overflow-x-auto snap-x snap-mandatory pb-6 scrollbar-none"
             style={{
-              scrollbarWidth: "none",
-              msOverflowStyle: "none",
+              scrollPaddingLeft: "24px",
+              scrollPaddingRight: "24px",
             }}
           >
-            {CASES.map((c) => (
+            {CASES.map((c, i) => (
               <div
                 key={c.id}
-                className="shrink-0 snap-center w-[92vw] max-w-[520px]"
+                data-slide-index={i}
+                className="shrink-0 snap-start w-[88vw] max-w-[520px]"
               >
                 <MacbookFrame
                   src={c.src}
@@ -118,28 +150,39 @@ export function Cases() {
                   imgWidth={c.imgWidth}
                   imgHeight={c.imgHeight}
                   onExpand={() => setOpenId(c.id)}
-                  label={<CaseLabel item={c} />}
+                  label={<NicheLabel niche={c.niche} />}
                 />
               </div>
             ))}
           </div>
 
-          {/* Fade na borda direita sinalizando conteudo alem */}
-          <div
-            aria-hidden="true"
-            className="pointer-events-none absolute top-0 right-0 bottom-6 w-10 bg-gradient-to-l from-[color:var(--ink-950)] to-transparent"
-          />
-        </div>
-
-        {/* Indicador de swipe + setinha animada */}
-        <div className="md:hidden flex items-center justify-center gap-2 text-xs text-[color:var(--text-on-dark-muted)] mt-1">
-          <span>deslize para ver o próximo</span>
-          <span
-            aria-hidden="true"
-            className="inline-block animate-[slideRight_1.4s_ease-in-out_infinite] text-[color:var(--gold-500)]"
-          >
-            →
-          </span>
+          {/* Dots + seta animada */}
+          <div className="flex items-center justify-center gap-4 mt-1">
+            <div className="flex items-center gap-2">
+              {CASES.map((c, i) => (
+                <button
+                  key={c.id}
+                  type="button"
+                  onClick={() => goTo(i)}
+                  aria-label={`Ir para case ${i + 1}`}
+                  className={`rounded-full transition-all duration-300 ${
+                    i === activeIndex
+                      ? "w-6 h-2 bg-[color:var(--gold-500)]"
+                      : "w-2 h-2 bg-white/25 hover:bg-white/40"
+                  }`}
+                />
+              ))}
+            </div>
+            <span className="text-xs text-[color:var(--text-on-dark-muted)]">
+              deslize
+            </span>
+            <span
+              aria-hidden="true"
+              className="inline-block animate-[slideRight_1.4s_ease-in-out_infinite] text-[color:var(--gold-500)] text-sm"
+            >
+              →
+            </span>
+          </div>
         </div>
       </div>
 
@@ -151,27 +194,19 @@ export function Cases() {
           alt={active.alt}
           imgWidth={active.imgWidth}
           imgHeight={active.imgHeight}
-          title={active.client}
+          title={active.niche}
         />
       )}
     </section>
   );
 }
 
-function CaseLabel({ item }: { item: CaseItem }) {
+function NicheLabel({ niche }: { niche: string }) {
   return (
-    <div>
-      <div className="flex items-baseline gap-2 flex-wrap">
-        <h3 className="font-display text-xl md:text-2xl font-bold text-[color:var(--text-on-dark)]">
-          {item.client}
-        </h3>
-        <span className="text-xs md:text-sm text-[color:var(--gold-500)] font-medium">
-          {item.niche}
-        </span>
-      </div>
-      <p className="mt-1.5 text-sm md:text-base text-[color:var(--text-on-dark-muted)] leading-relaxed">
-        {item.result}
-      </p>
+    <div className="text-center md:text-left">
+      <span className="text-sm md:text-base font-medium text-[color:var(--gold-500)]">
+        {niche}
+      </span>
     </div>
   );
 }
