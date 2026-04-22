@@ -21,7 +21,7 @@ const CASES: CaseItem[] = [
     src: "/cases/screencapture-lp-richesjewelry.png",
     alt: "Landing page de joalheria de luxo",
     imgWidth: 1920,
-    imgHeight: 8155,
+    imgHeight: 8103,
   },
   {
     id: "uninassau",
