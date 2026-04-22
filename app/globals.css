@@ -133,6 +133,16 @@ body {
   animation: soft-pulse 2.4s ease-in-out infinite;
 }
 
+/* Swipe indicator arrow (mobile carousel) */
+@keyframes slideRight {
+  0%, 100% { transform: translateX(0); opacity: 0.6; }
+  50%      { transform: translateX(6px); opacity: 1; }
+}
+
+/* Esconde scrollbar mas mantem scroll (carrosseis) */
+.scrollbar-none::-webkit-scrollbar { display: none; }
+.scrollbar-none { scrollbar-width: none; -ms-overflow-style: none; }
+
 /* Custom cursor (desktop only) */
 @media (hover: hover) and (pointer: fine) {
   .has-cursor * { cursor: none !important; }

@@ -98,31 +98,48 @@ export function Cases() {
           ))}
         </div>
 
-        {/* Mobile: carrossel horizontal com snap */}
-        <div
-          className="md:hidden -mx-6 px-6 flex gap-5 overflow-x-auto snap-x snap-mandatory pb-6"
-          style={{ scrollbarWidth: "none" }}
-        >
-          {CASES.map((c) => (
-            <div
-              key={c.id}
-              className="shrink-0 snap-center w-[88%]"
-            >
-              <MacbookFrame
-                src={c.src}
-                alt={c.alt}
-                imgWidth={c.imgWidth}
-                imgHeight={c.imgHeight}
-                onExpand={() => setOpenId(c.id)}
-                label={<CaseLabel item={c} />}
-              />
-            </div>
-          ))}
+        {/* Mobile: carrossel 1-por-vez com snap + fade indicativo na borda direita */}
+        <div className="md:hidden relative">
+          <div
+            className="-mx-6 px-6 flex gap-4 overflow-x-auto snap-x snap-mandatory pb-6 scrollbar-none"
+            style={{
+              scrollbarWidth: "none",
+              msOverflowStyle: "none",
+            }}
+          >
+            {CASES.map((c) => (
+              <div
+                key={c.id}
+                className="shrink-0 snap-center w-[92vw] max-w-[520px]"
+              >
+                <MacbookFrame
+                  src={c.src}
+                  alt={c.alt}
+                  imgWidth={c.imgWidth}
+                  imgHeight={c.imgHeight}
+                  onExpand={() => setOpenId(c.id)}
+                  label={<CaseLabel item={c} />}
+                />
+              </div>
+            ))}
+          </div>
+
+          {/* Fade na borda direita sinalizando conteudo alem */}
+          <div
+            aria-hidden="true"
+            className="pointer-events-none absolute top-0 right-0 bottom-6 w-10 bg-gradient-to-l from-[color:var(--ink-950)] to-transparent"
+          />
         </div>
 
-        {/* Indicador mobile de swipe */}
-        <div className="md:hidden text-center text-xs text-[color:var(--text-on-dark-muted)] mt-2">
-          ← deslize para ver mais →
+        {/* Indicador de swipe + setinha animada */}
+        <div className="md:hidden flex items-center justify-center gap-2 text-xs text-[color:var(--text-on-dark-muted)] mt-1">
+          <span>deslize para ver o próximo</span>
+          <span
+            aria-hidden="true"
+            className="inline-block animate-[slideRight_1.4s_ease-in-out_infinite] text-[color:var(--gold-500)]"
+          >
+            →
+          </span>
         </div>
       </div>
 

@@ -1,18 +1,17 @@
 "use client";
 
 import Image, { type StaticImageData } from "next/image";
-import { useEffect, useRef, useState, type ReactNode } from "react";
+import { useEffect, useRef, type ReactNode } from "react";
 import { cn } from "@/lib/utils";
 
 /**
  * Moldura de MacBook Pro (vista frontal) em SVG.
  * Chassis + bezel + notch + base com entalhe central, proporcao 1200x780.
- * A area de tela (conteudo interno) e posicionada em % por cima do SVG
- * e faz auto-scroll suave quando entra no viewport (pausa no hover).
+ * A area de tela e posicionada em % por cima do SVG e faz auto-scroll
+ * suave enquanto esta no viewport, pausando em hover/touch sem resetar.
  */
 
-// Area de tela relativa ao viewBox 1200x780:
-// x=55, y=45, w=1090, h=660
+// Area de tela relativa ao viewBox 1200x780 (x=55, y=45, w=1090, h=660).
 const SCREEN = {
   top: "5.77%",
   left: "4.58%",
@@ -40,54 +39,51 @@ export function MacbookFrame({
   const scrollRef = useRef<HTMLDivElement>(null);
   const wrapperRef = useRef<HTMLDivElement>(null);
   const hoveringRef = useRef(false);
-  const [isVisible, setIsVisible] = useState(false);
+  const visibleRef = useRef(false);
 
-  // Detecta visibilidade (>40% no viewport) pra ligar/desligar auto-scroll.
+  // Observer + loop RAF montados UMA VEZ no mount. visibleRef/hoveringRef
+  // controlam o tick internamente sem destruir o loop. Assim phase/phaseStart
+  // persistem entre idas-e-vindas do viewport e entre hovers.
   useEffect(() => {
-    const el = wrapperRef.current;
-    if (!el) return;
+    const wrapper = wrapperRef.current;
+    const scrollEl = scrollRef.current;
+    if (!wrapper || !scrollEl) return;
+
     const io = new IntersectionObserver(
-      ([entry]) => setIsVisible(entry.isIntersecting && entry.intersectionRatio >= 0.4),
-      { threshold: [0, 0.4, 0.8] },
+      ([entry]) => {
+        visibleRef.current =
+          entry.isIntersecting && entry.intersectionRatio >= 0.35;
+      },
+      { threshold: [0, 0.35, 0.7] },
     );
-    io.observe(el);
-    return () => io.disconnect();
-  }, []);
-
-  // Auto-scroll loop persistente: nao reseta em hover/touch.
-  // - Em hover: pausa ticks, mas mantem phase/posicao atual.
-  // - Ao sair do hover: re-sincroniza o timer com base no scrollTop atual
-  //   (o usuario pode ter rolado manualmente) e continua de onde estava.
-  // - Reset ao topo so acontece quando o ciclo natural completa (ao fim do "up").
-  useEffect(() => {
-    const el = scrollRef.current;
-    if (!el || !isVisible) return;
+    io.observe(wrapper);
 
     const DURATION_DOWN = 25000;
     const PAUSE_BOTTOM = 1200;
     const DURATION_UP = 900;
 
-    let rafId = 0;
     let phase: "down" | "pause" | "up" = "down";
     let phaseStart = performance.now();
-    let wasHovering = false;
+    let wasPaused = false;
 
-    const max = () => Math.max(1, el.scrollHeight - el.clientHeight);
+    const max = () => Math.max(1, scrollEl.scrollHeight - scrollEl.clientHeight);
 
     const tick = (ts: number) => {
-      if (hoveringRef.current) {
-        // Pausado: nao avanca nem mexe no scrollTop. Usuario pode rolar livre.
-        wasHovering = true;
+      // Pausa logica quando fora do viewport OU em hover.
+      // NAO mexe no scrollTop, NAO avanca phase.
+      if (!visibleRef.current || hoveringRef.current) {
+        wasPaused = true;
         rafId = requestAnimationFrame(tick);
         return;
       }
-      if (wasHovering) {
-        // Saindo do hover: resincroniza a partir da posicao atual, continua descendo.
-        wasHovering = false;
+
+      // Retomando de pausa: re-sincroniza phaseStart a partir do scrollTop atual
+      // (usuario pode ter rolado manualmente durante o hover).
+      if (wasPaused) {
+        wasPaused = false;
         const M = max();
-        const pct = el.scrollTop / M;
+        const pct = scrollEl.scrollTop / M;
         if (pct >= 0.995) {
-          // Ja estava no fim -> entra em pausa e depois volta ao topo.
           phase = "pause";
           phaseStart = ts;
         } else {
@@ -101,7 +97,7 @@ export function MacbookFrame({
 
       if (phase === "down") {
         const pct = Math.min(1, elapsed / DURATION_DOWN);
-        el.scrollTop = M * pct;
+        scrollEl.scrollTop = M * pct;
         if (pct >= 1) {
           phase = "pause";
           phaseStart = ts;
@@ -113,18 +109,23 @@ export function MacbookFrame({
         }
       } else {
         const pct = Math.min(1, elapsed / DURATION_UP);
-        el.scrollTop = M * (1 - pct);
+        scrollEl.scrollTop = M * (1 - pct);
         if (pct >= 1) {
           phase = "down";
           phaseStart = ts;
         }
       }
+
       rafId = requestAnimationFrame(tick);
     };
 
-    rafId = requestAnimationFrame(tick);
-    return () => cancelAnimationFrame(rafId);
-  }, [isVisible]);
+    let rafId = requestAnimationFrame(tick);
+
+    return () => {
+      cancelAnimationFrame(rafId);
+      io.disconnect();
+    };
+  }, []);
 
   return (
     <div className={cn("w-full", className)}>
@@ -144,8 +145,11 @@ export function MacbookFrame({
         onTouchEnd={() => {
           hoveringRef.current = false;
         }}
+        onTouchCancel={() => {
+          hoveringRef.current = false;
+        }}
       >
-        {/* Moldura SVG (absoluta, cobre todo o wrapper) */}
+        {/* Moldura SVG */}
         <svg
           viewBox="0 0 1200 780"
           className="absolute inset-0 w-full h-full pointer-events-none"
@@ -154,23 +158,23 @@ export function MacbookFrame({
         >
           <defs>
             <linearGradient id="mbChassis" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0%" stopColor="#2c2c30" />
-              <stop offset="100%" stopColor="#1a1a1d" />
+              <stop offset="0%" stopColor="#3a3a3e" />
+              <stop offset="100%" stopColor="#1f1f22" />
             </linearGradient>
             <linearGradient id="mbBase" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0%" stopColor="#3a3a3e" />
-              <stop offset="100%" stopColor="#1a1a1d" />
+              <stop offset="0%" stopColor="#44444a" />
+              <stop offset="100%" stopColor="#1c1c1f" />
             </linearGradient>
             <linearGradient id="mbGlare" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0%" stopColor="rgba(255,255,255,0.06)" />
+              <stop offset="0%" stopColor="rgba(255,255,255,0.08)" />
               <stop offset="100%" stopColor="rgba(255,255,255,0)" />
             </linearGradient>
           </defs>
 
           {/* Sombra base (ambient) */}
-          <ellipse cx="600" cy="770" rx="500" ry="7" fill="rgba(0,0,0,0.35)" />
+          <ellipse cx="600" cy="770" rx="510" ry="8" fill="rgba(0,0,0,0.45)" />
 
-          {/* Chassis/bezel (display lid) */}
+          {/* Chassis/bezel */}
           <rect
             x="0"
             y="0"
@@ -179,6 +183,8 @@ export function MacbookFrame({
             rx="22"
             ry="22"
             fill="url(#mbChassis)"
+            stroke="rgba(255,255,255,0.05)"
+            strokeWidth="1"
           />
           {/* Glare sutil topo */}
           <rect
@@ -197,36 +203,34 @@ export function MacbookFrame({
             fill="#0a0a0b"
           />
 
-          {/* Furo da tela (recorte escuro onde vai o conteudo; ficara atras do div scrollavel) */}
+          {/* Area da tela (fundo escuro atras do conteudo rolavel) */}
           <rect x="55" y="45" width="1090" height="660" rx="6" ry="6" fill="#000" />
 
           {/* Base/hinge inferior */}
           <path
-            d="M 30 740 L 1170 740 L 1150 755 Q 1135 764 1120 764 L 80 764 Q 65 764 50 755 Z"
+            d="M 30 740 L 1170 740 L 1150 758 Q 1135 766 1120 766 L 80 766 Q 65 766 50 758 Z"
             fill="url(#mbBase)"
           />
-
-          {/* Entalhe central da base (o grip de abrir o MacBook) */}
+          {/* Entalhe central da base */}
           <path
-            d="M 530 740 Q 530 752 545 752 L 655 752 Q 670 752 670 740 Z"
+            d="M 530 740 Q 530 754 545 754 L 655 754 Q 670 754 670 740 Z"
             fill="#0a0a0b"
           />
-
-          {/* Linha de separacao chassis/base */}
+          {/* Linha divisoria chassis/base */}
           <line
             x1="0"
             y1="740"
             x2="1200"
             y2="740"
-            stroke="rgba(0,0,0,0.6)"
+            stroke="rgba(0,0,0,0.7)"
             strokeWidth="1"
           />
         </svg>
 
-        {/* Area de tela scrollavel (HTML sobreposto) */}
+        {/* Tela scrollavel (HTML sobreposto, alinhado com a area interna do SVG) */}
         <div
           ref={scrollRef}
-          className="absolute overflow-y-auto overflow-x-hidden bg-black scrollbar-thin"
+          className="absolute overflow-y-auto overflow-x-hidden bg-black"
           style={{
             top: SCREEN.top,
             left: SCREEN.left,
@@ -243,18 +247,17 @@ export function MacbookFrame({
             width={imgWidth}
             height={imgHeight}
             className="w-full h-auto block select-none"
-            sizes="(max-width: 768px) 90vw, 560px"
-            priority={false}
+            sizes="(max-width: 768px) 92vw, 560px"
           />
         </div>
 
-        {/* Botao "ver em tela cheia" */}
+        {/* Botao tela cheia */}
         {onExpand && (
           <button
             type="button"
             onClick={onExpand}
             aria-label="Ver pagina em tela cheia"
-            className="absolute bottom-[12%] right-[7%] z-10 inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-black/70 hover:bg-black text-white text-xs font-medium backdrop-blur-sm border border-white/10 transition-colors"
+            className="absolute bottom-[12%] right-[7%] z-10 inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-black/75 hover:bg-black text-white text-xs font-medium backdrop-blur-sm border border-white/10 transition-colors"
           >
             <svg
               width="12"
