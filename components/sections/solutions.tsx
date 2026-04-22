@@ -26,11 +26,11 @@ const products: Product[] = [
     tag: "pagamento único",
     badge: "Mais pedido",
     description:
-      "LP com formulário que redireciona lead pra onde quiser. Ideal pra CRM, e-mail ou SDR.",
+      "LP com formulário pra captura de leads qualificados. Ideal pra equipe de vendas ou atendimento por e-mail.",
     icon: FileText,
     features: [
       "Formulário com validação e anti-spam",
-      "Integração com seu CRM ou planilha",
+      "Leads entregues por e-mail",
       "Meta Pixel + GA4 instalados",
     ],
     featured: true,
