@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { motion } from "motion/react";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 import { MacbookFrame } from "@/components/primitives/macbook-frame";
 import { CaseModal } from "@/components/primitives/case-modal";
 
@@ -39,7 +40,7 @@ export function Cases() {
   const trackRef = useRef<HTMLDivElement>(null);
   const active = CASES.find((c) => c.id === openId) || null;
 
-  // Detecta qual slide esta centrado no carrossel mobile pra pintar o dot ativo.
+  // Detecta qual slide esta centrado pra pintar o dot ativo.
   useEffect(() => {
     const track = trackRef.current;
     if (!track) return;
@@ -74,6 +75,9 @@ export function Cases() {
     }
   };
 
+  const canPrev = activeIndex > 0;
+  const canNext = activeIndex < CASES.length - 1;
+
   return (
     <section
       id="cases"
@@ -102,37 +106,35 @@ export function Cases() {
           </p>
         </motion.div>
 
-        {/* Desktop: grid 2 cols */}
-        <div className="hidden md:grid grid-cols-2 gap-8 lg:gap-10">
-          {CASES.map((c, i) => (
-            <motion.div
-              key={c.id}
-              initial={{ opacity: 0, y: 24 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-60px" }}
-              transition={{
-                duration: 0.7,
-                delay: i * 0.1,
-                ease: [0.22, 1, 0.36, 1],
-              }}
-            >
-              <MacbookFrame
-                src={c.src}
-                alt={c.alt}
-                imgWidth={c.imgWidth}
-                imgHeight={c.imgHeight}
-                onExpand={() => setOpenId(c.id)}
-                label={<NicheLabel niche={c.niche} />}
-              />
-            </motion.div>
-          ))}
-        </div>
+        {/* Carrossel unificado: 1 por vez em qualquer breakpoint */}
+        <div className="relative">
+          {/* Setas desktop (ocultas no mobile) */}
+          <button
+            type="button"
+            onClick={() => goTo(activeIndex - 1)}
+            disabled={!canPrev}
+            aria-label="Case anterior"
+            className="hidden md:inline-flex absolute left-0 top-1/2 -translate-y-1/2 -translate-x-2 lg:-translate-x-4 z-20 items-center justify-center w-11 h-11 rounded-full bg-white/10 hover:bg-white/20 disabled:opacity-30 disabled:cursor-not-allowed text-white backdrop-blur-sm border border-white/10 transition-colors"
+          >
+            <ChevronLeft className="w-5 h-5" />
+          </button>
+          <button
+            type="button"
+            onClick={() => goTo(activeIndex + 1)}
+            disabled={!canNext}
+            aria-label="Proximo case"
+            className="hidden md:inline-flex absolute right-0 top-1/2 -translate-y-1/2 translate-x-2 lg:translate-x-4 z-20 items-center justify-center w-11 h-11 rounded-full bg-white/10 hover:bg-white/20 disabled:opacity-30 disabled:cursor-not-allowed text-white backdrop-blur-sm border border-white/10 transition-colors"
+          >
+            <ChevronRight className="w-5 h-5" />
+          </button>
 
-        {/* Mobile: carrossel 1-por-vez, peek do proximo card + dots */}
-        <div className="md:hidden">
-          <div
+          <motion.div
             ref={trackRef}
-            className="-mx-6 px-6 flex gap-4 overflow-x-auto snap-x snap-mandatory pb-6 scrollbar-none"
+            initial={{ opacity: 0, y: 24 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-60px" }}
+            transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+            className="flex gap-4 md:gap-8 overflow-x-auto snap-x snap-mandatory pb-6 scrollbar-none -mx-6 px-6 md:mx-0 md:px-0"
             style={{
               scrollPaddingLeft: "24px",
               scrollPaddingRight: "24px",
@@ -142,7 +144,7 @@ export function Cases() {
               <div
                 key={c.id}
                 data-slide-index={i}
-                className="shrink-0 snap-start w-[88vw] max-w-[520px]"
+                className="shrink-0 snap-start w-[88vw] max-w-[520px] md:w-full md:max-w-[760px] md:mx-auto"
               >
                 <MacbookFrame
                   src={c.src}
@@ -154,35 +156,35 @@ export function Cases() {
                 />
               </div>
             ))}
-          </div>
+          </motion.div>
+        </div>
 
-          {/* Dots + seta animada */}
-          <div className="flex items-center justify-center gap-4 mt-1">
-            <div className="flex items-center gap-2">
-              {CASES.map((c, i) => (
-                <button
-                  key={c.id}
-                  type="button"
-                  onClick={() => goTo(i)}
-                  aria-label={`Ir para case ${i + 1}`}
-                  className={`rounded-full transition-all duration-300 ${
-                    i === activeIndex
-                      ? "w-6 h-2 bg-[color:var(--gold-500)]"
-                      : "w-2 h-2 bg-white/25 hover:bg-white/40"
-                  }`}
-                />
-              ))}
-            </div>
-            <span className="text-xs text-[color:var(--text-on-dark-muted)]">
-              deslize
-            </span>
-            <span
-              aria-hidden="true"
-              className="inline-block animate-[slideRight_1.4s_ease-in-out_infinite] text-[color:var(--gold-500)] text-sm"
-            >
-              →
-            </span>
+        {/* Dots + indicador de swipe */}
+        <div className="flex items-center justify-center gap-4 mt-2">
+          <div className="flex items-center gap-2">
+            {CASES.map((c, i) => (
+              <button
+                key={c.id}
+                type="button"
+                onClick={() => goTo(i)}
+                aria-label={`Ir para case ${i + 1}`}
+                className={`rounded-full transition-all duration-300 ${
+                  i === activeIndex
+                    ? "w-6 h-2 bg-[color:var(--gold-500)]"
+                    : "w-2 h-2 bg-white/25 hover:bg-white/40"
+                }`}
+              />
+            ))}
           </div>
+          <span className="md:hidden text-xs text-[color:var(--text-on-dark-muted)]">
+            deslize
+          </span>
+          <span
+            aria-hidden="true"
+            className="md:hidden inline-block animate-[slideRight_1.4s_ease-in-out_infinite] text-[color:var(--gold-500)] text-sm"
+          >
+            →
+          </span>
         </div>
       </div>
 
@@ -203,7 +205,7 @@ export function Cases() {
 
 function NicheLabel({ niche }: { niche: string }) {
   return (
-    <div className="text-center md:text-left">
+    <div className="text-center">
       <span className="text-sm md:text-base font-medium text-[color:var(--gold-500)]">
         {niche}
       </span>
