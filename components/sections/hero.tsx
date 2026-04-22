@@ -82,10 +82,10 @@ export function Hero() {
             className="flex flex-wrap items-center lg:justify-start justify-center gap-x-5 gap-y-2 text-xs md:text-sm text-[color:var(--text-on-dark-muted)]"
           >
             <li className="inline-flex items-center gap-2">
-              <Zap className="w-4 h-4 text-[color:var(--gold-500)]" /> 5 dias úteis
+              <Zap className="w-4 h-4 text-[color:var(--gold-500)]" /> Em até 5 dias úteis
             </li>
             <li className="inline-flex items-center gap-2">
-              <ShieldCheck className="w-4 h-4 text-[color:var(--gold-500)]" /> Garantia de satisfação
+              <ShieldCheck className="w-4 h-4 text-[color:var(--gold-500)]" /> Revisões até aprovar
             </li>
             <li className="inline-flex items-center gap-2">
               <Smartphone className="w-4 h-4 text-[color:var(--gold-500)]" /> Mobile-first por padrão
