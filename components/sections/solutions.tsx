@@ -26,11 +26,11 @@ const products: Product[] = [
     tag: "pagamento único",
     badge: "Mais pedido",
     description:
-      "LP com formulário pra captura de leads qualificados. Ideal pra equipe de vendas ou atendimento por e-mail.",
+      "LP com formulário pra captura de leads qualificados. Leads organizados em planilha compartilhada, prontos pra seu time trabalhar.",
     icon: FileText,
     features: [
       "Formulário com validação e anti-spam",
-      "Leads entregues por e-mail",
+      "Leads em planilha compartilhada em tempo real",
       "Meta Pixel + GA4 instalados",
     ],
     featured: true,
