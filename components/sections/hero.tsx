@@ -85,7 +85,7 @@ export function Hero() {
               <Zap className="w-4 h-4 text-[color:var(--gold-500)]" /> Em até 5 dias úteis
             </li>
             <li className="inline-flex items-center gap-2">
-              <ShieldCheck className="w-4 h-4 text-[color:var(--gold-500)]" /> Revisões até aprovar
+              <ShieldCheck className="w-4 h-4 text-[color:var(--gold-500)]" /> 3 rodadas de revisão
             </li>
             <li className="inline-flex items-center gap-2">
               <Smartphone className="w-4 h-4 text-[color:var(--gold-500)]" /> Mobile-first por padrão

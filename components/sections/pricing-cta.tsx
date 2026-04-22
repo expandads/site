@@ -25,8 +25,8 @@ const conditions = [
   },
   {
     icon: ShieldCheck,
-    title: "Revisões até você aprovar",
-    body: "Ajustamos quantas vezes precisar até a página ficar do seu jeito.",
+    title: "3 rodadas de revisão",
+    body: "Ajustes inclusos em até 3 rodadas até a página ficar do seu jeito.",
   },
 ];
 
